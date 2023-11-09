@@ -1,0 +1,69 @@
+---
+title: "TP 3 technique quantitative"
+output: pdf_document
+date: "2023-11-09"
+---
+
+```{r}
+salaire <- c(6000, 7400, 7500, 8200, 8207, 8900, 9100, 9900, 9950, 10750)
+age <- c(15, 26, 20, 43, 47, 37, 52, 34, 50, 44)
+```
+
+
+Determination du nombre de classes
+```{r}
+k.salaire <- round((max(salaire) - min(salaire))/1000)
+paste("Nombre de classe des salaires: ", k.salaire)
+k.age <- round((max(age) - min(age))/10)
+paste("Nombre de classe des salaires: ", k.age)
+```
+
+
+Determination du nombre classes de la variable salaire
+```{r}
+breaks.salaire <- min(salaire) + (0:k.salaire)*1000
+breaks.salaire[length(breaks.salaire)] <- breaks.salaire[length(breaks.salaire)] + 0.0001
+breaks.salaire
+```
+
+
+Determination du nombre classes de la variable age
+```{r}
+breaks.age <- min(age) + (0:k.age)*10
+breaks.age[length(breaks.age)] <- breaks.age[length(breaks.age)] + 0.0001
+breaks.age
+```
+
+
+Determination des classes de salaires
+```{r}
+salaire.qual <- cut(salaire, breaks = breaks.salaire, right = F)
+levels(salaire.qual) <- c("Pauvre", "Populaire", "Moyen", "Riche", "Bourgeois")
+salaire.qual
+```
+
+
+Determination des classes de age
+```{r}
+age.qual <- cut(age, breaks = breaks.age, right = F)
+levels(age.qual) <- c("Adolescent", "Jeune", "Adulte", "Senior")
+age.qual
+```
+
+
+Construction du tableau de contingence
+```{r}
+tab.cont <- table(age.qual, salaire.qual)
+tab.cont <- addmargins(tab.cont, FUN = sum, quiet = T)
+tab.cont
+```
+
+
+calcul des frequences relatives
+```{r}
+data <- data.frame(age = age.qual, salaire = salaire.qual)
+data
+```
+
+
+
