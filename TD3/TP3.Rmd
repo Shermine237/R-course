@@ -61,9 +61,35 @@ tab.cont
 
 calcul des frequences relatives
 ```{r}
-data <- data.frame(age = age.qual, salaire = salaire.qual)
-data
+bool.age <- (age.qual == levels(age.qual)[2])
+bool.salaire <- (salaire.qual == levels(salaire.qual)[1])
+bool <- bool.age & bool.salaire
+n21 <- sum(bool)
+f21 <- round(mean(bool) * 100, 2)
+paste("Nombre d'observations: n21 = ", n21, sep = "")
+paste("Nombre d'observations: f21 = ", f21, "%", sep = "")
+
+bool.age <- (age.qual == levels(age.qual)[1])
+bool.salaire <- (salaire.qual == levels(salaire.qual)[2])
+bool <- bool.age & bool.salaire
+n12 <- sum(bool)
+f12 <- round(mean(bool) * 100, 2)
+paste("Nombre d'observations: n12 = ", n12, sep = "")
+paste("Nombre d'observations: f12 = ", f12, "%", sep = "")
 ```
+
+
+Representation du nuage des points
+```{r}
+main <- "Nuage des points: salaire vs age"
+xlab <- "Age"
+ylab <- "Salaire"
+plot(age, salaire, main = main, xlab = xlab, ylab = ylab)
+```
+
+
+
+
 
 
 
